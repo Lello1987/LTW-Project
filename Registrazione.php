@@ -12,19 +12,26 @@
   </head>
   <body>
     <?php //INTERROGAZIONE AL DATABASE
-
+      session_start();
       $user = "";
       $pwd = "";
       $messUser = "";
       $messPwd = "";
+      $messPwd2 = "";
       if ($_SERVER["REQUEST_METHOD"] == "POST") { //in questo modo non parte il controllo subito appena si richiama la pagina
         $user = $_POST["user"];
+        $_SESSION["user"] = $user;
         $pwd = $_POST["pwd"];
+        $_SESSION["pwd"] = $pwd;
+        $pwd2 = $_POST["pwd2"];
         if(empty($_POST["user"])){ //CONTROLLA SE IL CAMPO USERNAME VIENE LASCIATO VUOTO
           $messUser = "Campo Username obbligatorio";
         }
         if(empty($_POST["pwd"])){ //CONTROLLA SE IL CAMPO USERNAME VIENE LASCIATO VUOTO
           $messPwd = "Campo Password obbligatorio";
+        }
+        if($pwd != $pwd2){ //CONTROLLA SE LE DUE PASSWORD CORRISPONDONO
+            $messPwd2 = "Le due password non corrispondono";
         } else { // SE E' CONTROLLA SE è VALIDO O ERRATO
         //------------------------------------------------------------------------
           $servername = "localhost";
@@ -39,16 +46,13 @@
              die("Connection failed: " . mysqli_connect_error());
           }
 
-          $sql = "SELECT * FROM Login WHERE username = '$user' AND password = '$pwd'";
+          $sql = "INSERT INTO Login (`username`, `password`) VALUES ('$user','$pwd')";
           $result = mysqli_query($conn, $sql);
-
-
-          if (mysqli_num_rows($result) > 0) {
-            header("location: HomePage.php"); //REGISTRAZIONE EFFETTUATA CON SUCCESSO REINDIRIZZATO NELLA HOME PAGE
+          if ($result) {
+              header("location: HomePage.php"); //REGISTRAZIONE EFFETTUATA CON SUCCESSO REINDIRIZZATO NELLA HOME PAGE
           } else {
-              $messUser = "Username o Password errati";
+              $messUser = "Errore utente già registrato";
           }
-
           mysqli_close($conn);
         }
       }
@@ -65,15 +69,23 @@
       <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-3">
           <form class="form-container" method="post" name="login" id="form" action="<?php echo $_SERVER["PHP_SELF"] ?>">
+            <!-- USERNAME -->
             <div class="form-group">
               <h5 style="color:red"> <?php echo $messUser ?> </h5>
               <label for="exampleInputEmail1">Username</label>
-              <input type="username" name="user" class="form-control" required>
+              <input type="username" name="user" class="form-control" value="<?php if($_SESSION["user"] != ""){echo $_SESSION["user"];}else{echo '';} ?>" required >
             </div>
+            <!-- PASSWORD -->
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
               <h5 style="color:red"> <?php echo $messPwd ?> </h5>
-              <input type="password" name="pwd" class="form-control" required>
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="pwd" class="form-control" required value="<?php if($_SESSION["pwd"] != ""){echo $_SESSION["pwd"];}else{echo '';} ?>" pattern="[A-Za-z0-9_-]{8,16}" >
+            </div>
+            <!-- CONTROLLA PASSWORD-->
+            <div class="form-group">
+              <h5 style="color:red"> <?php echo $messPwd2 ?> </h5>
+              <label for="exampleInputPassword1">Inserisci di nuovo la password</label>
+              <input type="password" name="pwd2" class="form-control" required pattern="[A-Za-z0-9_-]{8,16}" >
             </div>
             <!--
             SE VOLGIAMO IMPLEMENTARE IL "RICORDAMI"
