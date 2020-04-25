@@ -22,7 +22,6 @@
         $user = $_POST["user"];
         $_SESSION["user"] = $user;
         $pwd = $_POST["pwd"];
-        $_SESSION["pwd"] = $pwd;
         $pwd2 = $_POST["pwd2"];
         if(empty($_POST["user"])){ //CONTROLLA SE IL CAMPO USERNAME VIENE LASCIATO VUOTO
           $messUser = "Campo Username obbligatorio";
@@ -60,32 +59,33 @@
      ?>
     <nav class="navbar navbar-light bg-light"> <!-- Il colore è stato settato in boostrap.min.css in .bg-light-->
       <a class="navbar-brand" href="#">
-        <img src="IMG/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="IMG/Logo.png" width="30" height="30" class="d-inline-block align-left" alt="">
           InDispensApp
       </a>
     </nav>
 
     <section class="container-fluid">
       <section class="row justify-content-center">
-        <section class="col-12 col-sm-6 col-md-3">
+        <section class="col-12 col-sm-9 col-md-3">
           <form class="form-container" method="post" name="login" id="form" action="<?php echo $_SERVER["PHP_SELF"] ?>">
+            <p style="text-align:center; font-size:40px; font-family:Impact, Charcoal, sans-serif; color:#1d70b7"> Form di Registrazione </p>
             <!-- USERNAME -->
             <div class="form-group">
               <h5 style="color:red"> <?php echo $messUser ?> </h5>
-              <label for="exampleInputEmail1">Username</label>
-              <input type="username" name="user" class="form-control" value="<?php if($_SESSION["user"] != ""){echo $_SESSION["user"];}else{echo '';} ?>" required >
+              <label class="required"> Username  </label> <!-- La classe inserisce l'asterisco rosso per attributi necessari -->
+              <input type="username" name="user" class="form-control" required >
             </div>
             <!-- PASSWORD -->
             <div class="form-group">
               <h5 style="color:red"> <?php echo $messPwd ?> </h5>
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" name="pwd" class="form-control" required value="<?php if($_SESSION["pwd"] != ""){echo $_SESSION["pwd"];}else{echo '';} ?>" pattern="[A-Za-z0-9_-]{8,16}" >
+              <label class="required"> Password </label> <!-- La classe inserisce l'asterisco rosso per attributi necessari -->
+              <input type="password" name="pwd" class="form-control" required pattern="[A-Za-z0-9_-]{8,16}" >
             </div>
             <!-- CONTROLLA PASSWORD-->
             <div class="form-group">
               <h5 style="color:red"> <?php echo $messPwd2 ?> </h5>
-              <label for="exampleInputPassword1">Inserisci di nuovo la password</label>
-              <input type="password" name="pwd2" class="form-control" required pattern="[A-Za-z0-9_-]{8,16}" >
+              <label class="required"> Inserisci di nuovo la password </label> <!-- La classe inserisce l'asterisco rosso per attributi necessari -->
+              <input type="password" name="pwd2" class="form-control" required pattern="[A-Za-z0-9_]{8,16}" >
             </div>
             <!--
             SE VOLGIAMO IMPLEMENTARE IL "RICORDAMI"
@@ -94,7 +94,8 @@
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             -->
-            <input type="submit" class="btn btn-primary btn-block" style="color:yellow" value="Login"></input>
+            <p> <a href="Login.php"> Sei gi&agrave un utente? Accedi </a> </p>
+            <input type="submit" class="btn btn-primary btn-block" style="color:#f0cc0a" value="Registrazione"></input>
           </form>
         </section>
       </section>

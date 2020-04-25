@@ -60,18 +60,18 @@
           InDispensApp
       </a>
     </nav>
-
     <section class="container-fluid">
       <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-3">
           <form class="form-container" method="post" name="login" id="form" action="<?php echo $_SERVER["PHP_SELF"] ?>">
+            <p style="text-align:center; font-size:40px; font-family:Impact, Charcoal, sans-serif; color:#1d70b7"> Form di Login </p>
             <div class="form-group">
               <h5 style="color:red"> <?php echo $messUser ?> </h5>
-              <label for="exampleInputEmail1">Username</label>
+              <label class="required" > Username </label> <!-- La classe inserisce l'asterisco rosso per attributi necessari -->
               <input type="username" name="user" class="form-control" required>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label class="required"> Password </label> <!-- La classe inserisce l'asterisco rosso per attributi necessari -->
               <h5 style="color:red"> <?php echo $messPwd ?> </h5>
               <input type="password" name="pwd" class="form-control" required>
             </div>
@@ -82,7 +82,8 @@
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             -->
-            <input type="submit" class="btn btn-primary btn-block" style="color:yellow" value="Login"></input>
+            <p> <a href="Registrazione.php"> Non sei registrato? </a> </p>
+            <input type="submit" class="btn btn-primary btn-block" style="color:#f0cc0a" value="Login"></input>
           </form>
         </section>
       </section>
