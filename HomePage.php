@@ -8,139 +8,77 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"> </script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"> </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style>
-  /* NASCONDO INIZIALMENTE I BOTTONI*/
-  .nascosto1{display:none;}
-  .nascosto2{display:none;}
-  .nascosto3{display:none;}
-  .nascosto4{display:none;}
-</style>
+
+<?php
+// Start the session
+  session_start();
+?>
+
   <head>
     <meta charset="utf-8">
     <title>INDEX</title>
     <link rel="shortcut icon" type="image/png" href="IMG/Mini_Logo.png"/>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light"> <!-- Il colore è stato settato in boostrap.min.css in .bg-light-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- Il colore è stato settato in boostrap.min.css in .bg-light-->
       <a class="navbar-brand" href="#">
         <img src="IMG/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           InDispensApp
       </a>
-    </nav>
-    <h1> SEI NELL'INDEX </h1>
-    <input type="button" value="Chiudi Ripostiglio" class="nascosto1" onclick="chiudi1()">
-    <p class="par1" id="pa1"> Ripostiglio </p>
-    <input type="button" value="Chiudi Cantinetta vini" class="nascosto2" onclick="chiudi2()">
-    <p class="par2" id="pa2"> Cantinetta vini </p>
-    <input type="button" value="Chiudi Sgabuzzino" class="nascosto3" onclick="chiudi3()">
-    <p class="par3" id="pa3"> Sgabuzzino </p>
-    <input type="button" value="Chiudi Frigorifero" class="nascosto4" onclick="chiudi4()">
-    <p class="par4" id="pa4"> Frigorifero </p>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="HomePage.php">Dispense</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Categorie</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Prodotti</a>
+          </li>
 
+        </ul>
+      </div>
+      <a href='Login.php'>Esci</a>
+    </nav>
+    <div class="row">
+      <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="dispensa" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Dispensa</a>
+          <a class="nav-link" id="ripostiglio" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="true">Ripostiglio</a>
+          <a class="nav-link" id="cantinetta" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="true">Cantinetta vini</a>
+          <a class="nav-link" id="frigorifero" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="true">Frigorifero</a>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"> <p id="zonaDinamicaDispensa"> </p> </div>
+          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"> <p id="zonaDinamicaRipostiglio"> </p> </div>
+          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"> <p id="zonaDinamicaCantinetta"> </p> </div>
+          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"> <p id="zonaDinamicaFrigorifero"> </p> </div>
+        </div>
+      </div>
+    </div>
     <script>
-                    //APERTURA BOX
       $(document).ready(function(){
-        //RIPOSTIGLIO
-        $(".par1").click(function destra(){
-          var p = $(".par1");
-          var n = $(".nascosto1");
-          p.animate({left: '300px'}, "slow");
-          p.animate({height: '300px'}, "slow");
-          p.animate({width: '300px'}, "slow");
-          p.html("<p class='sega'>AGGIUNGI</p>");
-          n.show();
+        $("#dispensa").click(function(){
+          $("#zonaDinamicaDispensa").load("Dispense/Dispensa.php");
         });
-        //CANTINETTA VINI
-        $(".par2").click(function(){
-          var p = $(".par2");
-          var n2 = $(".nascosto2");
-          p.animate({left: '300px'}, "slow");
-          p.animate({height: '300px'}, "slow");
-          p.animate({width: '300px'}, "slow");
-          p.html("<p class='sega'>AGGIUNGI</p>");
-          n2.show();
+
+        $("#ripostiglio").click(function(){
+          $("#zonaDinamicaRipostiglio").load("Dispense/Ripostiglio.php");
         });
-        //SGABUZZINO
-        $(".par3").click(function(){
-          var p = $(".par3");
-          var n = $(".nascosto3");
-          p.animate({left: '300px'}, "slow");
-          p.animate({height: '300px'}, "slow");
-          p.animate({width: '300px'}, "slow");
-          p.html("<p class='sega'>AGGIUNGI</p>");
-          n.show();
+
+        $("#dispensa").click(function(){
+          $("#zonaDinamicaCantinetta").load("Dispense/Cantinetta.php");
         });
-        //FRIGORIFERO
-        $(".par4").click(function(){
-          var p = $(".par4");
-          var n4 = $(".nascosto4");
-          p.animate({left: '300px'}, "slow");
-          p.animate({height: '300px'}, "slow");
-          p.animate({width: '300px'}, "slow");
-          p.html("<p class='sega'>AGGIUNGI</p>");
-          n4.show();
+
+        $("#dispensa").click(function(){
+          $("#zonaDinamicaFrigorifero").load("Dispense/Frigorifero.php");
         });
       });
-
-              // CHIUSURA BOX
-      //FUNZIONI DI CHIUSURA DEI BOX, RIPORTANO I VARI BOX A SINISTRA NASCONDENDO I BOTTONI
-      //CHIUSURA RIPOSTIGLIO
-      function chiudi1(){
-        $(".nascosto1").click(function destra(){
-          var p = $("#pa1");
-          var p = $(".par1");
-          var c = $(".nascosto1");
-          var s = $(".agg1");
-          p.animate({height: '65px'}, "slow");
-          p.animate({width: '150px'}, "slow");
-          p.animate({left: '0px'}, "slow");
-          s.hide();//TOLGO LA SCRITTA AGGIUNGI
-          p.html("Cantinetta vini"); //"RIMETTO" FORZATAMENTE LA SCRITTA CANTINETTA VINI
-          c.hide();
-        });
-      }
-      //CHIUSURA CANTINETTA VINI
-      function chiudi2(){
-        $(".nascosto2").click(function destra(){
-          var p = $("#pa2");
-          var c = $(".nascosto2");
-          var s = $(".agg2");
-          p.animate({height: '65px'}, "slow");
-          p.animate({width: '150px'}, "slow");
-          p.animate({left: '0px'}, "slow");
-          s.hide();//TOLGO LA SCRITTA AGGIUNGI
-          p.html("Cantinetta vini"); //"RIMETTO" FORZATAMENTE LA SCRITTA CANTINETTA VINI
-          c.hide();
-        });
-      }
-      //CHIUSURA SGABUZZINO
-      function chiudi3(){
-        $(".nascosto3").click(function destra(){
-          var p = $("#pa3");
-          var c = $(".nascosto3");
-          var s = $(".agg3");
-          p.animate({height: '65px'}, "slow");
-          p.animate({width: '150px'}, "slow");
-          p.animate({left: '0px'}, "slow");
-          s.hide();//TOLGO LA SCRITTA AGGIUNGI
-          p.html("Sgabuzzino"); //"RIMETTO" FORZATAMENTE LA SCRITTA SGABUZZINO
-          c.hide();
-        });
-      }
-      //CHIUSURA FRIGORIFERO
-      function chiudi4(){
-        $(".nascosto4").click(function destra(){
-          var p = $("#pa4");
-          var c = $(".nascosto4");
-          var s = $(".agg2");
-          p.animate({height: '65px'}, "slow");
-          p.animate({width: '150px'}, "slow");
-          p.animate({left: '0px'}, "slow");
-          s.hide();//TOLGO LA SCRITTA AGGIUNGI
-          p.html("Frigorifero"); //"RIMETTO" FORZATAMENTE LA SCRITTA FRIGORIFERO
-          c.hide();
-        });
-      }
     </script>
+    <br>
+
   </body>
 </html>
